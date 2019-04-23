@@ -1,0 +1,16 @@
+extends ../layout
+
+block styles
+    title   #{product.name}
+
+block content
+    .container
+        .row
+            .card.col.s10.offset-s1.m8.offset-m2.l6.offset-l3
+                .card-image
+                    img(src=product.image, alt=product.name)                            
+                .card-content
+                    span.card-title.center #{product.name}   
+                    p   #{product.description}
+                    h5.center #{product.price} $
+                    a.btn-small.blue.lighten-2.dark-hover Add to cart

@@ -1,0 +1,21 @@
+extends ../layout.pug
+
+block content
+    .container.add-product
+        .row
+            h3.center Add product
+            form(action="/admin/add-product", method="post")
+                .input-field.col.offset-l3.l6.offset-s1.s10
+                    input(type = "text" name ="name")
+                    label(for="name") Name
+                .input-field.col.offset-l3.l6.offset-s1.s10
+                    input(type = "URL" name ="image")
+                    label(for="image") Image URL
+                .input-field.col.offset-l3.l6.offset-s1.s10
+                    input(type = "number" name ="price" step="0.01")
+                    label(for="price") Price
+                .input-field.col.offset-l3.l6.offset-s1.s10
+                    textarea(name="description").materialize-textarea
+                    label(for="description") Product description
+                .input-field.col.offset-l3.l6.offset-s1.s10
+                    input(type="submit", value="Add product").btn

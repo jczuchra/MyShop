@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block content
+    .container.products-list       
+            if products.length
+                each product in products
+                        .card
+                            .card-image
+                                img(src=product.image, alt=product.name)                            
+                            .card-content
+                                span.card-title.center #{product.name}   
+                                p   #{product.description}
+                                h5.center #{product.price} $
+                                .options
+                                    a(href=('/products/'+product.id)).btn-small.blue.lighten-2.dark-hover Details
+                                    form(action="/product-list", method="post")
+                                        button(type="submit").btn-small.blue.lighten-2.dark-hover Add to cart
+                                
+            else
+                h3.center No products yet.
