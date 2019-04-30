@@ -5,8 +5,7 @@ const bodyParser = require('body-parser');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-
-const error = require('./controllers/error');
+const errorRoutes = require('./routes/errors');
 
 const rootDir = require('./util/path');
 
@@ -25,6 +24,6 @@ app.use(shopRoutes);
 
 app.use('/admin', adminRoutes);
 
-app.use(error.getError404);
+app.use(errorRoutes);
 
 app.listen(3000);

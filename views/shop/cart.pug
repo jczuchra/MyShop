@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    h3.center Cart
+    .container
+        if products.length > 0
+            ul
+                for product in products
+                    li #{product.name} (#{product.qty})
+                    form(action="/delete-cart-product", method="post")
+                        input(type="submit", value="close").material-icons.red-text
+                        input(type="hidden", name="productId", value=(product.id))
+        else
+            h3.center No products in cart

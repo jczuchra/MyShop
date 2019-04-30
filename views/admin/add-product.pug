@@ -3,19 +3,27 @@ extends ../layout.pug
 block content
     .container.add-product
         .row
-            h3.center Add product
-            form(action="/admin/add-product", method="post")
+            if editing
+                h3.center Edit product
+            else
+                h3.center Add product
+            form(action=(editing ? "/admin/edit-product/" + product.id : "/admin/add-product"), method="post")
                 .input-field.col.offset-l3.l6.offset-s1.s10
-                    input(type = "text" name ="name")
+                    input(type = "text" name ="name" value =(editing ? product.name : ""))
                     label(for="name") Name
                 .input-field.col.offset-l3.l6.offset-s1.s10
-                    input(type = "URL" name ="image")
+                    input(type = "URL" name ="image" value =(editing ? product.image : ""))
                     label(for="image") Image URL
                 .input-field.col.offset-l3.l6.offset-s1.s10
-                    input(type = "number" name ="price" step="0.01")
+                    input(type = "number" name ="price" step="0.01" value =(editing ? product.price : ""))
                     label(for="price") Price
                 .input-field.col.offset-l3.l6.offset-s1.s10
-                    textarea(name="description").materialize-textarea
+                    if editing
+                        textarea(name="description" ).materialize-textarea #{product.description}
+                    else
+                        textarea(name="description" ).materialize-textarea
                     label(for="description") Product description
+                    if(editing)
+                        input(type="hidden", name="productId" value= (product.id))
                 .input-field.col.offset-l3.l6.offset-s1.s10
-                    input(type="submit", value="Add product").btn
+                    input(type="submit", value=(editing ? "Edit product" : "Add product")).btn

@@ -12,10 +12,8 @@ block content
                                 p   #{product.description}
                                 h5.center #{product.price} $
                                 .options
-                                    a(href=('/products/'+product.id)).btn-small.blue.lighten-2.dark-hover Details
-                                    form(action="/cart", method="post")
-                                        button(type="submit").btn-small.blue.lighten-2.dark-hover Add to cart
-                                        input(type="hidden", name="productId" value=(product.id))
+                                    a(href=('/admin/delete/'+product.id)).btn-small.blue.lighten-2.dark-hover Delete
+                                    a(href="/admin/edit-product/"+product.id+"?editing=true").btn-small.blue.lighten-2.dark-hover Edit product
                                 
             else
                 h3.center No products yet.

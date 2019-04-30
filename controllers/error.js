@@ -5,3 +5,9 @@ exports.getError404 = (req, res, next) => {
         title: 'Error 404'
     });
 }
+
+exports.getProductNotFoundError = (req, res, next) => {
+    res.render(path.join("error", "productDetailsError.pug"), {
+        title: 'Product not found'
+    })
+}

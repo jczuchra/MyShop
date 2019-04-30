@@ -13,4 +13,6 @@ block content
                     span.card-title.center #{product.name}   
                     p   #{product.description}
                     h5.center #{product.price} $
-                    a.btn-small.blue.lighten-2.dark-hover Add to cart
+                    form(action="/cart", method="post")
+                        button(type="submit").btn-small.blue.lighten-2.dark-hover Add to cart
+                        input(type="hidden", name="productId", value=(product.id))

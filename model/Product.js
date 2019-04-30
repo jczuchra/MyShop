@@ -29,7 +29,8 @@ function saveProductsToFile(products) {
 }
 
 module.exports = class Product {
-    constructor(name, image, price, description) {
+    constructor(id, name, image, price, description) {
+        this.id = id;
         this.name = name;
         this.image = image;
         this.price = price;
@@ -37,11 +38,29 @@ module.exports = class Product {
     }
 
     save() {
-        this.id = Math.random();
+        if (this.id) {
+            console.log('Dziala if');
+            readProductsFromFile(products => {
+                const prodIndex = products.findIndex(product => product.id.toString() === this.id);
+                products[prodIndex] = this;
+                products = JSON.stringify(products);
+                saveProductsToFile(products);
+            })
+        }
+        else {
+            this.id = Math.random();
+            readProductsFromFile(products => {
+                products.push(this);
+                products = JSON.stringify(products);
+                saveProductsToFile(products);
+            })
+        }
+    }
+
+    static delete(id) {
         readProductsFromFile(products => {
-            products.push(this);
-            products = JSON.stringify(products);
-            saveProductsToFile(products);
+            const updatedProducts = products.filter(product => product.id.toString() !== id);
+            saveProductsToFile(updatedProducts);
         })
     }
 
@@ -55,4 +74,6 @@ module.exports = class Product {
             cb(product);
         })
     }
+
+
 }
